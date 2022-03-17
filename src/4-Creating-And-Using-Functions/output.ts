@@ -1,12 +1,6 @@
 import { productsURL } from '../lib';
-
 const prefix = '🐉 ';
-
-type ProductType = {
-  id: number;
-  name: string;
-  icon?: string;
-};
+type productType = { id: number, name: string, icon?: string };
 
 export default async function updateOutput(id: string = 'output') {
   const products = await getProducts();
@@ -18,7 +12,7 @@ export default async function updateOutput(id: string = 'output') {
   }
 }
 
-function layoutProducts(products: ProductType[]) {
+function layoutProducts(products: productType[]) {
   const items = products.map(({ id, name, icon }) => {
     const productHtml = `
     <span class="card-id">#${id}</span>
@@ -42,56 +36,37 @@ function layoutProducts(products: ProductType[]) {
   return productsHtml;
 }
 
-async function getProducts(): Promise<ProductType[]> {
+async function getProducts(): Promise<productType[]> {
   const response: Response = await fetch(productsURL);
-  const products: ProductType[] = await response.json();
+  const products: productType[] = await response.json();
   return products;
 }
 
-/************************************************
- * Learning sample code.
- ***********************************************/
-
+//run our samples
 runTheLearningSamples();
-
 function runTheLearningSamples() {
-  // typed parameters
-
+  //hoisted
   function displayProductInfo(id: number, name: string) {
     console.log(`${prefix} typed parameters`);
-    console.log(`Product id=${id.toString()} and name=${name}`);
+    console.log(`product id=${id} and name=${name}`);
   }
+  displayProductInfo(25, 'Hamburga');
 
-  displayProductInfo(10, 'Pizza');
-
-  // defining functions
-
-  // function declaration
-  // hoisted
   console.log(`${prefix} function declaration`);
-  console.log(addNumbersDeclaration(7, 11));
+  console.log(addNumbersDeclaration(7, 18));
 
   function addNumbersDeclaration(x: number, y: number) {
-    const sum: number = x + y;
+    const sum = x + y;
     return sum;
   }
 
-  // function expression (also anonymous)
-  // not hoisted
   const addNumbersExpression = function (x: number, y: number): number {
-    const sum: number = x + y;
+    const sum = x + y;
     return sum;
-  };
+  }
 
   console.log(`${prefix} function expression`);
-  console.log(addNumbersExpression(7, 11));
-
-  // Return Scalar
-
-  // see addNumbersDeclaration
-
-  console.log(`${prefix} return scalar value`);
-  console.log(addNumbersDeclaration(7, 11));
+  console.log(addNumbersExpression(7, 8));
 
   const sampleProducts = [
     {
@@ -118,22 +93,16 @@ function runTheLearningSamples() {
   console.log(`${prefix} return array`);
   console.log(getProductNames());
 
-  // Return Types
-
-  // CREATE type ProductType
-
-  function getProductById(id: number): ProductType | undefined {
-    return sampleProducts.find((p) => (id = p.id));
+  function getProductById(id: number): productType | undefined {
+    return sampleProducts.find(p => id === p.id);
   }
 
   console.log(`${prefix} return ProductType`);
-  console.table(getProductById(10));
+  console.log(getProductById(10));
 
-  // Return void
-
-  function displayProducts(products: ProductType[]): void {
-    const productNames = products.map((p) => {
-      const name = p.name.toLowerCase();
+  function displayProducts(products: productType[]) {
+    const productNames = products.map((p) => {//function (p){}
+      const name = p.name.toLocaleLowerCase();
       return name;
     });
     const msg = `Sample products include: ${productNames.join(', ')}`;
@@ -143,20 +112,11 @@ function runTheLearningSamples() {
 
   displayProducts(sampleProducts);
 
-  // async/await function
+  const {floor,random} = Math;
+  const getRandomInt = (max: number = 10) => floor(random() * max);
 
-  // *** async function getProducts()
-
-  // Arrow functions
-
-  // see function displayProducts()
-  // and layoutProducts()
-  // and getProductById()
-
-  // Optional parameters
-
-  function createProduct(name: string, icon?: string): ProductType {
-    const id = getRandomInt(1000);
+  function createProduct(name: string, icon?: string): productType {
+    const id = getRandomInt();
     return {
       id,
       name,
@@ -164,22 +124,12 @@ function runTheLearningSamples() {
     };
   }
 
-  const { floor, random } = Math;
-  const getRandomInt = (max: number = 1000) => floor(random() * max);
-
-  console.log(`${prefix} Optional parameters`);
+  console.log(`${prefix} optional parameters`);
   let pineapple = createProduct('pineapple', 'pine-apple.jpg');
   let mango = createProduct('mango');
   console.log(pineapple, mango);
 
-  // Default parameters
-
-  // modify getRandomInt()
-
-  function createProductWithDefaults(
-    name: string,
-    icon: string = 'generic-fruit.jpg',
-  ): ProductType {
+  function createProductWithDefaults(name: string, icon: string = 'generic_fruit.jpg'): productType {
     const id = getRandomInt();
     return {
       id,
@@ -189,46 +139,26 @@ function runTheLearningSamples() {
   }
 
   console.log(`${prefix} Default parameters`);
-  pineapple = createProductWithDefaults('pineapple', 'pine-apple.jpg');
+  pineapple = createProductWithDefaults('pineapple');
   mango = createProductWithDefaults('mango');
   console.log(pineapple, mango);
 
-  // *** updateOutput()
-
-  // Rest parameters
-
-  function buildAddress(
-    street: string,
-    city: string,
-    ...restOfAddress: string[]
-  ) {
-    const address = `${street}, ${city} ${restOfAddress.join(' ')}`;
+  function buildAddress(street: string, city: string, ...restOfAddress: string[]) {
+    const address = `${street} ${city} ${restOfAddress.join(' ')}`;
     return address;
   }
 
-  const someAddress = buildAddress(
-    '1 lois lane',
-    'smallville',
-    'apt 101', // rest
-    'area 51', // rest
-    'mystery country', // rest
-  );
-
+  //rest parameters
+  const someArea = buildAddress('Mahalle', 'Sokak', 'Apartma', 'Daire', 'Semt', 'Şehir');
   console.log(`${prefix} Rest parameters`);
-  console.log(someAddress);
+  console.log(someArea);
 
-  // Destructuring parameters
-
-  function displayProduct({ id, name }: ProductType): void {
-    console.log(`${prefix} Destructuring parameters`);
+  function displayProduct({id,name}: productType): void {
+    console.log(`${prefix} Destructing parameters`);
     console.log(`Product id=${id} and name=${name}`);
   }
-
   const prod = getProductById(10);
-  if (prod) {
+  if(prod){
     displayProduct(prod);
   }
-
-  // ~~~ Math destructuring
-  // ~~~ layoutProducts() uses destructuring
 }
