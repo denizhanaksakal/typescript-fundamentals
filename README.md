@@ -1,20 +1,68 @@
-# TypeScript Fundamentals
+# Why Typescript
+  + JavaScript, with guardrails
+  + Can adapt JavaScript updates
+  + Detect more errors at during development
+  + Enhanced tooling
+  + Solid and reliable
 
-Code samples from the TypeScript Fundamentals course on [Pluralsight.com](https://pluralsight.com). Samples for each module from the course can be found in the `src` directory.
+# Installation
++ NodeJS (LTS build)
 
-## Running the Project
+# Build 
++	Build fix: https://backbencher.dev/articles/typescript-solved-cannot-redeclare-block-scoped-variable-name
+## Manual build
++ npx --package typescript tsc --outDir dist index.ts
+## Normal build
++ npm init -y (package.json created)
++ npm install typescript --save-dev
 
-1. Install Node.js LTS ([https://nodejs.org](https://nodejs.org))
-1. Open a command window at the root of this project
-1. Run `npm install`
-1. Run `npm start` to start the web server and run the app
+# Built-in types 
++ string
++ number
++ boolean
++ array
 
-**NOTE:**
+# Additional built-in types
++ Undefined
++ Null
++ Any
++ Void
++ (union type)
 
-Running `npm start` compiles your TypeScript and loads the JavaScript bundle into memory (you won't see a `dist` folder created in this case).
-If you want to compile your TypeScript and create a bundle in the `dist` folder you can run `npm run webpack` or
-`npm run webpack:w` (if you want webpack to watch for changes to files).
+# Regular Enums vs Const Enums
++ Regular Enums returns Enum value
++ Const Enums returns position of that Enum, cannot convert this position to value
 
-## Credits
+# Functions
++ Typed parameters
++ Defining functions
+  + Hoisted/function declaration can be used any where
+  + Function expression must be used after declaration
++ Return values
++ Async/Await
++ Optional parameters (name?:string)
++ Arrow Functions
+  + Ideal for inner functions
++ Default Parameters
++ Rest parameters (…restParameters:string[])
++ Parameters destructuring
+  + Can pass the properties of type as a parameter
 
-Font Awesome Free icons are being used as per the kit guidelines https://fontawesome.com/kits
+# Interface
++ Define a code contract
++ Define the shape of data
++ Define what type of object a function returns
++ Define what type of object a function expects
++ Define the type of a variable
++ Drive consistency
+
+# Interface vs Type
++ Interface represent object-like data structure
++ Type represent primitive type and object-like data structure
+
+# Class
++ A class encapsulates data and code. It acts as a template that can be used to create object instances.
++ Using public/private in constructor will auto implement properties.
+  + constructor(public id: number, public name: string, public icon: string) {}
++ Inside class no need to use function keyword.
++ Cannot create object instances from abstract class.
