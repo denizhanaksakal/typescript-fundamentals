@@ -6,7 +6,7 @@
   + Solid and reliable
 
 # Installation
-+ NodeJS (LTS build)
++ NodeJS (LTS build) https://nodejs.org/
 
 # Build 
 +	Build fix: https://backbencher.dev/articles/typescript-solved-cannot-redeclare-block-scoped-variable-name
@@ -15,6 +15,7 @@
 ## Normal build
 + npm init -y (package.json created)
 + npm install typescript --save-dev
++ npm start
 
 # Built-in types 
 + string
@@ -23,10 +24,10 @@
 + array
 
 # Additional built-in types
-+ Undefined
-+ Null
-+ Any
-+ Void
++ undefined
++ null
++ any
++ void
 + (union type)
 
 # Regular Enums vs Const Enums
@@ -34,18 +35,18 @@
 + Const Enums returns position of that Enum, cannot convert this position to value
 
 # Functions
-+ Typed parameters
-+ Defining functions
-  + Hoisted/function declaration can be used any where
++ Typed Parameters
++ Defining Functions
+  + Hoisted function and function declaration can be used any where
   + Function expression must be used after declaration
-+ Return values
++ Return Values
 + Async/Await
-+ Optional parameters (name?:string)
++ Optional Parameters (name?:string)
 + Arrow Functions
   + Ideal for inner functions
-+ Default Parameters
-+ Rest parameters (…restParameters:string[])
-+ Parameters destructuring
++ Default Parameters (If parameter is not passed default value can be used)
++ Rest Parameters (…restParameters:string[])
++ Parameters De-structuring
   + Can pass the properties of type as a parameter
 
 # Interface
